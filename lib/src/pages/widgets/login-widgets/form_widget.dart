@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter_login_bloc/src/pages/widgets/login-widgets/button-iniciar.dart';
-import 'package:flutter_login_bloc/src/pages/widgets/login-widgets/email-input.dart';
-import 'package:flutter_login_bloc/src/pages/widgets/login-widgets/password-inpput.dart';
+import 'package:flutter_login_bloc/src/blocs/provider.dart';
+import 'package:flutter_login_bloc/src/pages/widgets/login-widgets/button_iniciar.dart';
+import 'package:flutter_login_bloc/src/pages/widgets/login-widgets/email_input.dart';
+import 'package:flutter_login_bloc/src/pages/widgets/login-widgets/password_input.dart';
 
 class FormWidget extends StatelessWidget {
   const FormWidget({Key key}) : super(key: key);
@@ -10,6 +11,8 @@ class FormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final bloc = Provider.of(context);
+
     return SingleChildScrollView(
         child: Column(
       children: [
@@ -39,12 +42,20 @@ class FormWidget extends StatelessWidget {
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(height: 60.0),
-            EmailInputWidget(),
+            EmailInputWidget(
+              bloc: bloc,
+            ),
             SizedBox(height: 30.0),
-            PasswordInputWidget(),
+            PasswordInputWidget(
+              bloc: bloc,
+            ),
             SizedBox(height: 30.0),
-            ButtonLoginWidget()
+            ButtonLoginWidget(bloc: bloc),
           ]),
+        ),
+        Text('¿Olvido la contraseña?'),
+        SizedBox(
+          height: 100,
         )
       ],
     ));
